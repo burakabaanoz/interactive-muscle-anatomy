@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İnsan Kas Anatomisi</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="search-container">
+            <input type="text" id="muscleSearch" class="search-input" placeholder="Kas adı yazın (ör: Biceps)..." autocomplete="off"/>
+            <div id="suggestions" class="suggestions"></div>
+        </div>
+
+        <h1 class="title">İnsan Kas Anatomisi</h1>
+        <p class="subtitle">Kasları arayın veya üzerine gelin</p>
+
+        <svg id="anatomySvg" viewBox="0 0 900 1100" xmlns="http://www.w3.org/2000/svg">
+            <!-- Baş (cilt) -->
+            <ellipse class="skin" cx="450" cy="130" rx="35" ry="45"/>
+            
+            <!-- Boyun (cilt) -->
+            <rect class="skin" x="425" y="170" width="50" height="35" rx="5"/>
+            
+            <!-- Sternocleidomastoid -->
+            <ellipse class="muscle" id="sternocleidomastoid-left" cx="435" cy="185" rx="8" ry="25" transform="rotate(-15 435 185)"/>
+            <text class="label" x="420" y="190" text-anchor="end">Sternocleidomastoid</text>
+            
+            <ellipse class="muscle" id="sternocleidomastoid-right" cx="465" cy="185" rx="8" ry="25" transform="rotate(15 465 185)"/>
+            <text class="label" x="480" y="190">Sternocleidomastoid</text>
+            
+            <!-- Trapezius (Trapez) -->
+            <path class="muscle" id="trapezius-left" d="M 400,205 L 370,220 L 350,250 L 345,290 L 365,300 L 400,295 L 415,250 Z"/>
+            <text class="label" x="370" y="260" text-anchor="middle">Trapezius</text>
+            
+            <path class="muscle" id="trapezius-right" d="M 500,205 L 530,220 L 550,250 L 555,290 L 535,300 L 500,295 L 485,250 Z"/>
+            <text class="label" x="530" y="260" text-anchor="middle">Trapezius</text>
+            
+            <!-- Gövde (cilt tabanı) -->
+            <rect class="skin" x="380" y="205" width="140" height="260" rx="15"/>
+            
+            <!-- Deltoid (Sol omuz) -->
+            <ellipse class="muscle" id="deltoid-left" cx="340" cy="245" rx="35" ry="45" transform="rotate(-25 340 245)"/>
+            <text class="label" x="310" y="250" text-anchor="end">Deltoid</text>
+            
+            <!-- Deltoid (Sağ omuz) -->
+            <ellipse class="muscle" id="deltoid-right" cx="560" cy="245" rx="35" ry="45" transform="rotate(25 560 245)"/>
+            <text class="label" x="590" y="250">Deltoid</text>
+            
+            <!-- Pectoralis Major (Sol) -->
+            <path class="muscle" id="pectoralis-major-left" d="M 410,220 L 370,240 L 350,270 L 350,310 L 380,335 L 420,330 L 440,300 L 440,250 Z"/>
+            <text class="label" x="395" y="285" text-anchor="middle">Pectoralis Major</text>
+            
+            <!-- Pectoralis Major (Sağ) -->
+            <path class="muscle" id="pectoralis-major-right" d="M 490,220 L 530,240 L 550,270 L 550,310 L 520,335 L 480,330 L 460,300 L 460,250 Z"/>
+            <text class="label" x="505" y="285" text-anchor="middle">Pectoralis Major</text>
+            
+            <!-- Serratus Anterior (Sol) -->
+            <g id="serratus-anterior-left">
+                <ellipse class="muscle" cx="395" cy="300" rx="8" ry="18"/>
+                <ellipse class="muscle" cx="390" cy="325" rx="8" ry="18"/>
+                <ellipse class="muscle" cx="385" cy="350" rx="8" ry="18"/>
+            </g>
+            <text class="label" x="370" y="325" text-anchor="end">Serratus Anterior</text>
+            
+            <!-- Serratus Anterior (Sağ) -->
+            <g id="serratus-anterior-right">
+                <ellipse class="muscle" cx="505" cy="300" rx="8" ry="18"/>
+                <ellipse class="muscle" cx="510" cy="325" rx="8" ry="18"/>
+                <ellipse class="muscle" cx="515" cy="350" rx="8" ry="18"/>
+            </g>
+            <text class="label" x="530" y="325">Serratus Anterior</text>
+            
+            <!-- Rectus Abdominis (6 pack) -->
+            <g id="rectus-abdominis">
+                <rect class="muscle" x="420" y="340" width="28" height="30" rx="5"/>
+                <rect class="muscle" x="452" y="340" width="28" height="30" rx="5"/>
+                <rect class="muscle" x="420" y="375" width="28" height="30" rx="5"/>
+                <rect class="muscle" x="452" y="375" width="28" height="30" rx="5"/>
+                <rect class="muscle" x="420" y="410" width="28" height="30" rx="5"/>
+                <rect class="muscle" x="452" y="410" width="28" height="30" rx="5"/>
+            </g>
+            <text class="label" x="450" y="395" text-anchor="middle">Rectus Abdominis</text>
+            
+            <!-- External Obliques (Sol) -->
+            <path class="muscle" id="external-oblique-left" d="M 390,350 L 370,375 L 360,410 L 365,445 L 390,450 L 410,425 L 415,385 Z"/>
+            <text class="label" x="375" y="405" text-anchor="end">External Oblique</text>
+            
+            <!-- External Obliques (Sağ) -->
+            <path class="muscle" id="external-oblique-right" d="M 510,350 L 530,375 L 540,410 L 535,445 L 510,450 L 490,425 L 485,385 Z"/>
+            <text class="label" x="525" y="405">External Oblique</text>
+            
+            <!-- Kollar (cilt) -->
+            <rect class="skin" x="300" y="285" width="35" height="180" rx="15"/>
+            <rect class="skin" x="565" y="285" width="35" height="180" rx="15"/>
+            
+            <!-- Biceps (Sol) -->
+            <ellipse class="muscle" id="biceps-left" cx="315" cy="340" rx="20" ry="55"/>
+            <text class="label" x="285" y="345" text-anchor="end">Biceps</text>
+            
+            <!-- Biceps (Sağ) -->
+            <ellipse class="muscle" id="biceps-right" cx="585" cy="340" rx="20" ry="55"/>
+            <text class="label" x="615" y="345">Biceps</text>
+            
+            <!-- Triceps (Sol) -->
+            <ellipse class="muscle" id="triceps-left" cx="305" cy="340" rx="14" ry="50"/>
+            <text class="label" x="280" y="345" text-anchor="end">Triceps</text>
+            
+            <!-- Triceps (Sağ) -->
+            <ellipse class="muscle" id="triceps-right" cx="595" cy="340" rx="14" ry="50"/>
+            <text class="label" x="620" y="345">Triceps</text>
+            
+            <!-- Önkol (cilt) -->
+            <rect class="skin" x="305" y="400" width="25" height="110" rx="10"/>
+            <rect class="skin" x="570" y="400" width="25" height="110" rx="10"/>
+            
+            <!-- Brachioradialis (Sol) -->
+            <ellipse class="muscle" id="brachioradialis-left" cx="315" cy="445" rx="12" ry="45"/>
+            <text class="label" x="285" y="450" text-anchor="end">Brachioradialis</text>
+            
+            <!-- Brachioradialis (Sağ) -->
+            <ellipse class="muscle" id="brachioradialis-right" cx="585" cy="445" rx="12" ry="45"/>
+            <text class="label" x="615" y="450">Brachioradialis</text>
+            
+            <!-- Eller -->
+            <ellipse class="skin" cx="318" cy="520" rx="15" ry="22"/>
+            <ellipse class="skin" cx="582" cy="520" rx="15" ry="22"/>
+            
+            <!-- Kalça ve bacaklar (cilt) -->
+            <ellipse class="skin" cx="415" cy="490" rx="45" ry="50"/>
+            <ellipse class="skin" cx="485" cy="490" rx="45" ry="50"/>
+            
+            <!-- Gluteus Maximus (Sol) -->
+            <ellipse class="muscle" id="gluteus-maximus-left" cx="415" cy="490" rx="40" ry="45"/>
+            <text class="label" x="380" y="495" text-anchor="end">Gluteus Maximus</text>
+            
+            <!-- Gluteus Maximus (Sağ) -->
+            <ellipse class="muscle" id="gluteus-maximus-right" cx="485" cy="490" rx="40" ry="45"/>
+            <text class="label" x="520" y="495">Gluteus Maximus</text>
+            
+            <!-- Hip Flexors -->
+            <ellipse class="muscle" id="hip-flexors-left" cx="425" cy="510" rx="15" ry="25"/>
+            <text class="label" x="405" y="515" text-anchor="end">Hip Flexors</text>
+            
+            <ellipse class="muscle" id="hip-flexors-right" cx="475" cy="510" rx="15" ry="25"/>
+            <text class="label" x="495" y="515">Hip Flexors</text>
+            
+            <!-- Uyluk (cilt) -->
+            <ellipse class="skin" cx="410" cy="640" rx="42" ry="110"/>
+            <ellipse class="skin" cx="490" cy="640" rx="42" ry="110"/>
+            
+            <!-- Quadriceps (Sol) -->
+            <g id="quadriceps-left">
+                <ellipse class="muscle" cx="405" cy="630" rx="22" ry="95"/>
+                <ellipse class="muscle" cx="425" cy="630" rx="18" ry="95"/>
+                <ellipse class="muscle" cx="390" cy="640" rx="16" ry="85"/>
+            </g>
+            <text class="label" x="375" y="640" text-anchor="end">Quadriceps</text>
+            
+            <!-- Quadriceps (Sağ) -->
+            <g id="quadriceps-right">
+                <ellipse class="muscle" cx="495" cy="630" rx="22" ry="95"/>
+                <ellipse class="muscle" cx="475" cy="630" rx="18" ry="95"/>
+                <ellipse class="muscle" cx="510" cy="640" rx="16" ry="85"/>
+            </g>
+            <text class="label" x="525" y="640">Quadriceps</text>
+            
+            <!-- Hamstrings (Sol) -->
+            <ellipse class="muscle" id="hamstrings-left" cx="410" cy="640" rx="25" ry="90"/>
+            <text class="label" x="375" y="660" text-anchor="end">Hamstrings</text>
+            
+            <!-- Hamstrings (Sağ) -->
+            <ellipse class="muscle" id="hamstrings-right" cx="490" cy="640" rx="25" ry="90"/>
+            <text class="label" x="525" y="660">Hamstrings</text>
+            
+            <!-- Adductors (İç bacak) -->
+            <ellipse class="muscle" id="adductors-left" cx="430" cy="620" rx="12" ry="70" transform="rotate(8 430 620)"/>
+            <text class="label" x="430" y="650" text-anchor="middle">Adductors</text>
+            
+            <ellipse class="muscle" id="adductors-right" cx="470" cy="620" rx="12" ry="70" transform="rotate(-8 470 620)"/>
+            <text class="label" x="470" y="650" text-anchor="middle">Adductors</text>
+            
+            <!-- Baldır (cilt) -->
+            <ellipse class="skin" cx="410" cy="840" rx="28" ry="90"/>
+            <ellipse class="skin" cx="490" cy="840" rx="28" ry="90"/>
+            
+            <!-- Gastrocnemius (Sol) -->
+            <ellipse class="muscle" id="gastrocnemius-left" cx="410" cy="820" rx="24" ry="70"/>
+            <text class="label" x="375" y="825" text-anchor="end">Gastrocnemius</text>
+            
+            <!-- Gastrocnemius (Sağ) -->
+            <ellipse class="muscle" id="gastrocnemius-right" cx="490" cy="820" rx="24" ry="70"/>
+            <text class="label" x="525" y="825">Gastrocnemius</text>
+            
+            <!-- Soleus (Sol) -->
+            <ellipse class="muscle" id="soleus-left" cx="410" cy="860" rx="20" ry="50"/>
+            <text class="label" x="380" y="865" text-anchor="end">Soleus</text>
+            
+            <!-- Soleus (Sağ) -->
+            <ellipse class="muscle" id="soleus-right" cx="490" cy="860" rx="20" ry="50"/>
+            <text class="label" x="520" y="865">Soleus</text>
+            
+            <!-- Tibialis Anterior (Sol) -->
+            <ellipse class="muscle" id="tibialis-anterior-left" cx="395" cy="840" rx="10" ry="65"/>
+            <text class="label" x="370" y="845" text-anchor="end">Tibialis Anterior</text>
+            
+            <!-- Tibialis Anterior (Sağ) -->
+            <ellipse class="muscle" id="tibialis-anterior-right" cx="505" cy="840" rx="10" ry="65"/>
+            <text class="label" x="530" y="845">Tibialis Anterior</text>
+            
+            <!-- Ayaklar -->
+            <ellipse class="skin" cx="410" cy="945" rx="20" ry="35"/>
+            <ellipse class="skin" cx="490" cy="945" rx="20" ry="35"/>
+        </svg>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
