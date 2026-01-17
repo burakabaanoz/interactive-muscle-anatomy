@@ -26,9 +26,6 @@ This project was created for **educational purposes**, to make learning human mu
 - SVG
 - JavaScript (Vanilla)
 
-## 📸 Preview
-*(You can add a screenshot here later)*
-
 ## 🛠️ How to Use
 1. Clone or download the repository
 2. Open `index.html` in your browser
